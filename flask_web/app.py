@@ -1,10 +1,24 @@
-from flask import Flask
+from flask import Flask, render_template, request
+from PIL import Image
+
+
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def hello_world():
-    return 'Hey, we have Flask in a Docker container!'
+    return render_template("index.html")
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
 
+@app.route("/", methods=["POST"])
+def upload_file():
+    uploaded_file = request.files["file"]
+    try:
+        image = Image.open(uploaded_file.stream)
+        return f"Width: {image.width}, Height: {image.height}"
+    except Exception as e:
+        return f"File: {upload_file}, Exception: {e}"
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
