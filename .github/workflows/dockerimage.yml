@@ -20,3 +20,10 @@ jobs:
       run: |
         docker login -u fredrikfornwall -p $DOCKER_HUB_ACCESS_TOKEN
         make push_docker_image
+    - name: Deploy to Fly
+      uses: superfly/flyctl-actions@master
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        FLY_PROJECT_PATH: flask_web
+      with:
+        args: "deploy"

@@ -1,4 +1,4 @@
-IMAGE_NAME = fredrikfornwall/smile-detector
+IMAGE_NAME = fredrikfornwall/first-image-classifier
 
 docker_image:
 	cd flask_web && docker build -t $(IMAGE_NAME):latest .
