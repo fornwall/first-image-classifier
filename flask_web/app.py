@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from PIL import Image
+# from PIL import Image
 from tempfile import NamedTemporaryFile
 from fastai.learner import load_learner
 
@@ -27,7 +27,11 @@ def upload_file():
         #image = Image.open(temp.name)
         #return f"Width: {image.width}, Height: {image.height}"
         prediction = learner.predict(temp.name)
-        return f"Prediction: {prediction}"
+        predicted_category = prediction[0] # 'yes' or 'no'
+        predicted_category_idx = list(learner.dls.vocab).index(predicted_category)
+        certainty = prediction[2][predicted_category_idx]
+
+        return f"Smiling: {prediction[0]} (with {certainty} certainty)"
     except Exception as e:
         return f"File: {upload_file}, Exception: {e}"
 
