@@ -23,9 +23,6 @@ def upload_file():
     temp = NamedTemporaryFile()
     uploaded_file.save(temp)
     try:
-        #image = Image.open(uploaded_file.stream)
-        #image = Image.open(temp.name)
-        #return f"Width: {image.width}, Height: {image.height}"
         prediction = learner.predict(temp.name)
         predicted_category = prediction[0] # 'yes' or 'no'
         predicted_category_idx = list(learner.dls.vocab).index(predicted_category)
