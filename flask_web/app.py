@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 # from PIL import Image
 from tempfile import NamedTemporaryFile
 from fastai.learner import load_learner
@@ -17,6 +17,11 @@ def hello_world():
     return render_template("index.html")
 
 
+@app.route("/script.js")
+def script():
+    return render_template("script.js")
+
+
 @app.route("/", methods=["POST"])
 def upload_file():
     uploaded_file = request.files["file"]
@@ -26,11 +31,12 @@ def upload_file():
         prediction = learner.predict(temp.name)
         predicted_category = prediction[0] # 'yes' or 'no'
         predicted_category_idx = list(learner.dls.vocab).index(predicted_category)
-        certainty = prediction[2][predicted_category_idx]
+        certainty = prediction[2][predicted_category_idx].item()
 
-        return f"Smiling: {prediction[0]} (with {certainty} certainty)"
+        smiling = predicted_category == 'yes'
+        return jsonify(smiling=smiling, certainty=certainty)
     except Exception as e:
-        return f"File: {upload_file}, Exception: {e}"
+        return jsonify(error=f"{e}")
 
 
 if __name__ == "__main__":
