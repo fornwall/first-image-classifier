@@ -27,6 +27,9 @@ document.querySelector('#file').addEventListener('change', (e) => {
 });
 
 function uploadFile(file) {
+  const output = document.querySelector('#output');
+  output.innerHTML = '<p>Awaiting classification...</p>';
+
   let url = '';
   let formData = new FormData();
   formData.append('file', file)
@@ -36,7 +39,6 @@ function uploadFile(file) {
         const smiling = data['smiling'];
         const certainty = data['certainty'];
 
-        const output = document.querySelector('#output');
         output.innerHTML = '';
         const outputText = document.createElement('h2');
         outputText.textContent = 'Smiling: ' + (smiling ? 'YES' : 'NO') + ' (' + certainty.toFixed(3) + ' certain)';
