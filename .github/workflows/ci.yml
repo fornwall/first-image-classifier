@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
   push:
@@ -11,15 +11,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
       run: make docker_image
-    - name: Upload the Docker image
+
+    - name: Upload Docker image
       env:
         DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       run: |
         docker login -u fredrikfornwall -p $DOCKER_HUB_ACCESS_TOKEN
         make push_docker_image
+
     - name: Deploy to Fly
       uses: superfly/flyctl-actions@master
       env:
