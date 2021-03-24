@@ -3,5 +3,6 @@ A small web application created following the [From Model to Production](https:/
 
 - The model is trained as shown in [notebook.ipynb](notebook.ipynb).
 - Faces are from the [UTKFace](https://susanqq.github.io/UTKFace/) Large Scale Face Dataset.
-- A [docker image](https://hub.docker.com/r/fredrikfornwall/first-image-classifier) is built wrapping the [Flask](https://flask.palletsprojects.com/) web application framework in the [flask_web/](flask_web/) directory.
+- A web app using the [Flask](https://flask.palletsprojects.com/) framework in the [flask_web/](flask_web/) directory exposes the model.
+- Using [Dockerfile](Dockerfile) a [docker image](https://hub.docker.com/r/fredrikfornwall/first-image-classifier) is built.
 - The image is deployed using [fly.io](https://fly.io) to [https://image-classifier.fly.dev/](https://image-classifier.fly.dev/).
