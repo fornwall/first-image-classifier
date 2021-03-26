@@ -23,7 +23,7 @@ function handleFiles(files) {
 }
 
 document.querySelector('#file').addEventListener('change', (e) => {
-    handleFiles(e.target.files);
+  handleFiles(e.target.files);
 });
 
 function uploadFile(file) {
@@ -36,13 +36,13 @@ function uploadFile(file) {
   fetch(url, { method: 'POST', body: formData })
     .then((response) => response.json())
     .then((data) => {
-        const smiling = data['smiling'];
-        const certainty = data['certainty'];
+      const smiling = data['smiling'];
+      const certainty = data['certainty'];
 
-        output.innerHTML = '';
-        const outputText = document.createElement('h2');
-        outputText.textContent = 'Smiling: ' + (smiling ? 'YES' : 'NO') + ' (' + certainty.toFixed(3) + ' certain)';
-        output.appendChild(outputText);
+      output.innerHTML = '';
+      const outputText = document.createElement('h2');
+      outputText.textContent = 'Smiling: ' + (smiling ? 'YES' : 'NO') + ' (' + certainty.toFixed(3) + ' certain)';
+      output.appendChild(outputText);
     });
 }
 

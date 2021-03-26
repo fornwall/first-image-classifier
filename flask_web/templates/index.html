@@ -1,51 +1,76 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Smile Detector</title>
-    <style>
-      form {
-          border: 2px dashed #ccc;
-          border-radius: 20px;
-          width: 480px;
-          font-family: sans-serif;
-          margin: 100px auto;
-          padding: 20px;
-          margin-bottom: 10px;
-          text-align: center;
-      }
-      form.highlight { border-color: purple; }
-      p { margin-top: 0; }
-      #gallery { margin-top: 2em; text-align: center; }
-      #gallery img { width: 200px; vertical-align: middle; }
-      .button {
-          display: inline-block;
-          padding: 10px;
-          background: #ccc;
-          cursor: pointer;
-          border-radius: 5px;
-          border: 1px solid #ccc;
-        }
-      .button:hover { background: #ddd; }
-      input { display: none; }
-    </style>
-  </head>
-  <body>
-    <form method="post" action="/" enctype="multipart/form-data">
-      <h1>Smile Detector</h1>
-      <p>Predict if a given image contains a smiling person.</p>
-      <p>Source at <a href="https://github.com/fornwall/first-image-classifier">github.com/fornwall/first-image-classifier</a>.</p>
-      <p>Submit an image for classification using:</p>
-      <p><code>curl https://image-classifier.fly.dev -F file=@path/to/file.jpg</code></p>
-      <p>or</p>
-      <input type="file" id="file" name="file" accept="image/*"/>
-      <label class="button" for="file">Select image to classify</label>
 
-      <div id="gallery"></div>
-      <div id="output"></div>
-    </form>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smile Detector</title>
+  <style>
+    form {
+      border: 2px dashed #ccc;
+      border-radius: 20px;
+      width: 480px;
+      font-family: sans-serif;
+      margin: 100px auto;
+      padding: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
 
-    <script src="script.js"></script>
-  </body>
+    form.highlight {
+      border-color: purple;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    #gallery {
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    #gallery img {
+      width: 200px;
+      vertical-align: middle;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px;
+      background: #ccc;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .button:hover {
+      background: #ddd;
+    }
+
+    input {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form method="post" action="/" enctype="multipart/form-data">
+    <h1>Smile Detector</h1>
+    <p>Predict if a given image contains a smiling person.</p>
+    <p>Source at <a
+        href="https://github.com/fornwall/first-image-classifier">github.com/fornwall/first-image-classifier</a>.</p>
+    <p>Submit an image for classification using:</p>
+    <p><code>curl https://image-classifier.fly.dev -F file=@path/to/file.jpg</code></p>
+    <p>or</p>
+    <input type="file" id="file" name="file" accept="image/*" />
+    <label class="button" for="file">Select image to classify</label>
+
+    <div id="gallery"></div>
+    <div id="output"></div>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
